@@ -1,0 +1,23 @@
+{
+    "name": "bupy7/yii2-config",
+    "description": "Storage of application configuration.",
+    "type": "yii2-extension",
+    "keywords": ["yii2","extension","module","config"],
+    "license": "BSD-3-Clause",
+    "version": "1.0.0",
+    "authors": [
+        {
+            "name": "Vasilij Belosludcev",
+            "email": "bupy765@gmail.com"
+        }
+    ],
+    "require": {
+        "yiisoft/yii2": "*",
+        "yiisoft/yii2-bootstrap": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "bupy7\\config\\": ""
+        }
+    }
+}
