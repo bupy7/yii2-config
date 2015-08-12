@@ -39,8 +39,8 @@ class DefaultController extends Controller
             foreach ($models as $model) {
                 $result = $result && $model->save(true, ['value']);
             }
-            if ($result) {
-                Yii::$app->session->setFlash('success', Module::t('core', 'SAVE_SUCCESS'));                
+            if ($result && Module::getInstance()->configManager->clearCache()) {
+                Yii::$app->session->setFlash('success', Module::t('SAVE_SUCCESS'));                
                 return $this->redirect(['index']);
             }
         }

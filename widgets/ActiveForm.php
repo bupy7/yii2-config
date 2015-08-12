@@ -2,6 +2,7 @@
 
 namespace bupy7\config\widgets;
 
+use Yii;
 use bupy7\config\Module;
 use bupy7\config\models\Config;
 
@@ -25,7 +26,7 @@ class ActiveForm extends \yii\bootstrap\ActiveForm
         $field = parent::field($model, "[{$model->id}]{$attribute}", $options);
         $field = call_user_func_array([$field, Config::typeList($model->type)], $model->options);
         if (!empty($model->hint)) {
-            $field = $field->hint(Module::t('params', $model->hint));
+            $field = $field->hint(Yii::t(Module::getInstance()->messageCategory, $model->hint));
         }
         return $field;
     }

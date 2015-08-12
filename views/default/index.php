@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use bupy7\config\Module;
 use bupy7\config\widgets\ActiveForm;
 
-$this->title = Module::t('core', 'SETTINGS');
+$this->title = Module::t('SETTINGS');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="page-header">
@@ -23,6 +23,6 @@ $form = ActiveForm::begin([
     <?= $form->field($model); ?>
 <?php endforeach; ?>
 <?php
-echo Html::submitButton(Module::t('core', 'SAVE'), ['class' => 'btn btn-success']);
+echo Html::submitButton(Module::t('SAVE'), ['class' => 'btn btn-success']);
 
 ActiveForm::end();

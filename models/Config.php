@@ -60,31 +60,28 @@ class Config extends ActiveRecord
     /**
      * Сonfiguration parameter does not depend on language settings.
      */
-    const LANGUAGE_NO = 0;
+    const LANGUAGE_ALL = 0;
     /**
      * Configuration paramter depend on 'russian' language settings.
      */
     const LANGUAGE_RU = 1;
-    
+ 
     /**
      * @var array Languages map.
      */
     static private $_lang = [
         'ru' => self::LANGUAGE_RU,
-    ]; 
-        
+    ];        
     /**
      * @var array Rules of field.
      * @see rules()
      */
     private $_rules = [];
-    
     /**
      * @var type Labels of fields.
      * @see attributeLabels()
      */
     private $_labels = [];
-    
     /**
      * @var array Map types.
      */
@@ -138,7 +135,7 @@ class Config extends ActiveRecord
         $this->_rules = $rules;
         
         // add label of fields
-        $this->_labels = ['value' => Module::t('params', $this->label)];
+        $this->_labels = ['value' => Yii::t(Module::getInstance()->messageCategory, $this->label)];
         
         parent::afterFind();
     }
@@ -169,10 +166,10 @@ class Config extends ActiveRecord
     }
     
     /**
-     * Return configuration map of application.
+     * Return list of parameters.
      * @return array
      */
-    static public function getMap()
+    static public function params()
     {
         $query = (new Query)
             ->select([
@@ -184,7 +181,7 @@ class Config extends ActiveRecord
             ->where([
                 'or', 
                 ['language' => self::$_lang[Yii::$app->language]], 
-                ['language' => self::LANGUAGE_NO],
+                ['language' => self::LANGUAGE_ALL],
             ]);
         $result = [];
         foreach ($query->batch() as $rows) {
