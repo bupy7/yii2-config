@@ -41,18 +41,23 @@ class ManagerController extends Controller
             return self::EXIT_CODE_NORMAL;
         }     
         // insert params
+        $success = 0;
+        $all = count($this->params);
         foreach ($this->params as $param) {
-            $this->insert($param);
+            $success += $this->insert($param);
         }       
         // flush cache
         $this->run('cache/flush-all');      
-        $this->stdout("\nConfiguration successfully initialized.\n", Console::FG_GREEN);
+        $this->stdout(
+            "\nConfiguration successfully initialized.  All: {$all}. Successfully: {$success}.\n", 
+            Console::FG_GREEN
+        );
     }
     
     /**
-     * Adding new configuration parameters of application.
+     * Rescan configuration parameters of application. Delete not exists and add new parameters.
      */
-    public function actionAddNew()
+    public function actionRescan()
     {        
         $all = count($this->params);
         $success = 0;

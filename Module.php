@@ -66,7 +66,7 @@ class Module extends \yii\base\Module
             'rules' => [                                // rules
                 ['boolean'],
             ],
-            'options' => [                              // HTML-options
+            'options' => [                              // arguments of field type
                 ['maxlength' => true]
             ],
             'hint' => 'HINT_PARAM_DISPLAY_SITENAME',    // hint
