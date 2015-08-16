@@ -13,7 +13,7 @@ class m150802_175752_init extends Migration
             'module' => Schema::TYPE_STRING . ' NOT NULL',
             'name' => Schema::TYPE_STRING . ' NOT NULL',
             'label' => Schema::TYPE_STRING . ' NOT NULL',
-            'value' => Schema::TYPE_STRING,
+            'value' => Schema::TYPE_TEXT,
             'type' => Schema::TYPE_SMALLINT . ' NOT NULL',
             'language' => Schema::TYPE_SMALLINT . ' NOT NULL',
             'hint' => Schema::TYPE_TEXT,
