@@ -29,7 +29,11 @@ class DefaultController extends Controller
      */
     public function actionIndex()
     {
-        $models = Config::find()->where(['module' => $this->byModule])->indexBy('id')->all();
+        $models = Config::find()
+            ->where(['module' => $this->byModule])
+            ->orderBy(['id' => SORT_ASC])
+            ->indexBy('id')
+            ->all();
         if (Model::loadMultiple($models, Yii::$app->request->post())) {
             if (Yii::$app->request->isAjax) {
                 Yii::$app->response->format = Response::FORMAT_JSON;
