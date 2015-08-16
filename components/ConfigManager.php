@@ -8,8 +8,8 @@ use bupy7\config\Module;
 use Exception;
 
 /**
- * Configuration manager. You can get parameters via this component.
- * 
+ * Management of configuration parameters. You can get parameters via this component.
+ * Example:
  * ~~~
  * Yii::$app->configManager('example', 'example');
  * ~~~

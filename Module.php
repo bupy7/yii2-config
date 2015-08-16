@@ -9,7 +9,6 @@ use yii\di\Instance;
 use yii\caching\Cache;
 use bupy7\config\components\ConfigManager;
 use bupy7\config\models\Config;
-use bupy7\config\widgets\ActiveForm;
 
 /**
  * This is module for configuration dynamic parameters of application.
@@ -21,9 +20,9 @@ class Module extends \yii\base\Module
     /**
      * @var array|MessageSource Translation message configuration for parameters of config.
      */
-    public $translation;
+    public $i18n;
     /**
-     * @var string The translation message category for parameters of config.
+     * @var string string translation message file category name of i18n for parameters of config.
      */
     public $messageCategory = 'app';   
     /**
@@ -31,11 +30,11 @@ class Module extends \yii\base\Module
      */
     public $enableCaching = false;
     /**
-     * @var string|array|Cache
+     * @var string|array|Cache Cache component that uses for caching of parameters.
      */
     public $cache = 'cache';
     /**
-     * @var string|array|ConfigManager
+     * @var string|array|ConfigManager Config manager of get parameters.
      */
     public $configManager = 'configManager';
     /**
@@ -134,10 +133,10 @@ class Module extends \yii\base\Module
                 'bupy7/config' => 'core.php',
             ],
         ];
-        if ($this->translation instanceof MessageSource) {
-            Yii::$app->i18n->translations[$this->messageCategory] = Yii::createObject($this->translation);
-        } elseif (is_array($this->translation)) {
-            Yii::$app->i18n->translations[$this->messageCategory] = $this->translation;
+        if ($this->i18n instanceof MessageSource) {
+            Yii::$app->i18n->translations[$this->messageCategory] = Yii::createObject($this->i18n);
+        } elseif (is_array($this->i18n)) {
+            Yii::$app->i18n->translations[$this->messageCategory] = $this->i18n;
         }
     }
 }
