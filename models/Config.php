@@ -55,7 +55,12 @@ class Config extends ActiveRecord
      * Type field of 'checkbox'.
      * @see \yii\widgets\ActiveField::checkbox()
      */
-    const TYPE_YES_NO = 7;
+    const TYPE_YES_NO = 6;
+    /**
+     * Type field of 'widget'.
+     * @see \yii\widgets\ActiveField::widget()
+     */
+    const TYPE_WIDGET = 7;
     
     /**
      * Сonfiguration parameter does not depend on language settings.
@@ -92,6 +97,7 @@ class Config extends ActiveRecord
         self::TYPE_CHECKBOX_LIST => 'checkboxList',
         self::TYPE_RADIO_LIST => 'radioList',
         self::TYPE_YES_NO => 'checkbox',
+        self::TYPE_WIDGET => 'widget',
     ];
     
     /**
