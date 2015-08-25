@@ -59,7 +59,7 @@ class ConfigManager extends \yii\base\Component
      */
     protected function prepare()
     {
-        if (!isset($this->params)) {
+        if (!isset($this->_params)) {
             $module = Module::getInstance();     
             if ($module->enableCaching) {
                 if (($this->_params = $module->cache->get([__CLASS__, 'params'])) === false) {
