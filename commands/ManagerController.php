@@ -49,7 +49,7 @@ class ManagerController extends Controller
         // flush cache
         $this->run('cache/flush-all');      
         $this->stdout(
-            "\nConfiguration successfully initialized.  All: {$all}. Successfully: {$success}.\n", 
+            "\nConfiguration successfully initialized. All parameters: {$all}. Successfully added: {$success}.\n", 
             Console::FG_GREEN
         );
     }
@@ -60,27 +60,32 @@ class ManagerController extends Controller
     public function actionRescan()
     {        
         $added = 0;
+        $removed = 0;
+        $allowedParams = (new Query)
+            ->from(Config::tableName())
+            ->indexBy(function($row) {
+                return $row['module'] . '.' . $row['name'];
+            })
+            ->all();
+        // add
         foreach ($this->params as $param) {
-            if (
-                !(new Query)
-                    ->from(Config::tableName())
-                    ->where([
-                        'module' => $param['module'], 
-                        'name' => $param['name'],
-                    ])
-                    ->exists()
-            ) {
+            $key = $param['module'] . '.' . $param['name'];
+            if (!isset($allowedParams[$key])) {
                 $added += $this->insert($param);
             }
-        }      
+            unset($allowedParams[$key]);
+        }     
+        // remove
+        foreach ($allowedParams as $param) {
+            $removed += Yii::$app->db->createCommand()
+                ->delete(Config::tableName(), ['id' => $param['id']])
+                ->execute();
+        }
         // flush cache
         if ($added > 0) {
             $this->run('cache/flush-all');
         }       
-        $this->stdout(
-            "Rescan successfully finished. Added: {$added}.\n",
-            Console::FG_GREEN
-        );
+        $this->stdout("Rescan successfully finished. Added: {$added}. Removed: {$removed}.\n", Console::FG_GREEN);
     }
     
     /**
