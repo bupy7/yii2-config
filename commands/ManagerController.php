@@ -59,8 +59,7 @@ class ManagerController extends Controller
      */
     public function actionRescan()
     {        
-        $all = count($this->params);
-        $success = 0;
+        $added = 0;
         foreach ($this->params as $param) {
             if (
                 !(new Query)
@@ -71,15 +70,15 @@ class ManagerController extends Controller
                     ])
                     ->exists()
             ) {
-                $success += $this->insert($param);
+                $added += $this->insert($param);
             }
         }      
         // flush cache
-        if ($success > 0) {
+        if ($added > 0) {
             $this->run('cache/flush-all');
         }       
         $this->stdout(
-            "New configuration successfully added. All: {$all}. Successfully: {$success}.\n",
+            "Rescan successfully finished. Added: {$added}.\n",
             Console::FG_GREEN
         );
     }
