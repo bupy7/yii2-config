@@ -1,5 +1,8 @@
 # yii2-config
 
+This is module allow storing configuration parameters of application to database
+and management they dynamically from admin panel.
+
 Installation
 ------------
 
@@ -238,6 +241,14 @@ After added configuration parameters run rescan:
 Result:
 
 ![Screenshot](screenshot.png)
+
+### Get value of config parameter
+
+```php
+Yii::$app->configManager('exampleModuleName', 'exampleParameterName');
+``` 
+
+If parameter not found, then will be throw exception.
 
 ##License
 
