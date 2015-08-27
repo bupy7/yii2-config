@@ -129,7 +129,7 @@ Example for ```textInput``` type:
 - `hint` *(string)* - Hint of field. It must be translation message. More info 
 to `Yii::t()`.
 
-Example:
+Example configuration parameters:
 
 ```php
 use bupy7\config\Module as ConfigModule;
