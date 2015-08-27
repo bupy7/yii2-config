@@ -91,21 +91,21 @@ config/default/index
 
 All parameters **required** must be content following options:
 
-- `module` (string) - Name of module parameter where it will be use (app, 
+- `module` *(string)* - Name of module parameter where it will be use (app, 
 shop, cart, blog, news and etc.).
-- `name` (string) - Name of parameter (mainPageTitle, adminEmail and etc.).
+- `name` *(string)* - Name of parameter (mainPageTitle, adminEmail and etc.).
 
 > Module name and name must be unique.
 
-- `label` (string) - Label of parameter. It must be translation message. More info 
+- `label` *(string)* - Label of parameter. It must be translation message. More info 
 to `Yii::t()`.
-- `type` (integer) - Type of field (`bupy7\config\Module::TYPE_INPUT`, 
+- `type` *(integer)* - Type of field (`bupy7\config\Module::TYPE_INPUT`, 
 `bupy7\config\Module::TYPE_TEXT` and etc). Allowed type field you can see to 
 `bupy7\config\Module`.
 
-- `language` (integer) - Language for which this config parameter will be uses (
+- `language` *(integer)* - Language for which this config parameter will be uses (
 `bupy7\config\Module::LANGUAGE_RU`, `bupy7\config\Module::LANGUAGE_ALL` and etc).
-- `rules` (array) - Rules of field. All rules must be specified without field name.
+- `rules` *(array)* - Rules of field. All rules must be specified without field name.
 Example: 
 ```php
 'rules' => [
@@ -117,10 +117,10 @@ More info to `bupy7\config\models\Config::afterFind()`.
 
 Additional options:
 
-- `value` (string) -  Value of config parameter.
-- `options` (array) - Options depend of field type. More info to 
+- `value` *(string)* -  Value of config parameter.
+- `options` *(array)* - Options depend of field type. More info to 
 `bupy7\config\widgets\ActiveForm::field()`.
-- `hint` (string) - Hint of field. It must be translation message. More info 
+- `hint` *(string)* - Hint of field. It must be translation message. More info 
 to `Yii::t()`.
 
 ##License
