@@ -120,7 +120,7 @@ More info to `bupy7\config\models\Config::afterFind()`.
 
 Additional options:
 
-- `value` *(string)* -  Value of config parameter.
+- `value` *(string)* -  Value of config parameter. By default empty.
 - `options` *(array)* - Options depend of field type. More info to 
 `bupy7\config\widgets\ActiveForm::field()`.
 Example for ```textInput``` type:
