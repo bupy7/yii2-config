@@ -83,7 +83,9 @@ Install demo parameters:
 
 Config manager allowed by URL: 
 
-```config/default/index```
+```
+config/default/index
+```
 
 ### Adding config parameters
 
