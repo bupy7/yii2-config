@@ -1,6 +1,6 @@
 {
     "name": "bupy7/yii2-config",
-    "description": "Storage of application configuration.",
+    "description": "This is module allow storing configuration parameters of application to database and management they dynamically from admin panel.",
     "type": "yii2-extension",
     "keywords": ["yii2","extension","module","config"],
     "license": "BSD-3-Clause",
