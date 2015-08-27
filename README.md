@@ -245,7 +245,7 @@ Result:
 ### Get value of config parameter
 
 ```php
-Yii::$app->configManager('exampleModuleName', 'exampleParameterName');
+Yii::$app->configManager->get('exampleModuleName', 'exampleParameterName');
 ``` 
 
 If parameter not found, then will be throw exception.

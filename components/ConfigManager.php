@@ -11,7 +11,7 @@ use Exception;
  * Management of configuration parameters. You can get parameters via this component.
  * Example:
  * ~~~
- * Yii::$app->configManager('example', 'example');
+ * Yii::$app->configManager->get('example', 'example');
  * ~~~
  * 
  * @author Vasilij "BuPy7" Belosludcev http://mihaly4.ru
