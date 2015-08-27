@@ -20,6 +20,7 @@ class m150802_175752_init extends Migration
             'options' => Schema::TYPE_BINARY,
             'rule' => Schema::TYPE_BINARY,
         ]);
+        $this->createIndex('unique-module-name', Config::tableName(), ['module', 'name'], true);
     }
 
     public function down()

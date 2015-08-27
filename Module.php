@@ -18,6 +18,51 @@ use bupy7\config\models\Config;
 class Module extends \yii\base\Module
 {
     /**
+     * Type field of 'textInput' .
+     * @see \yii\widgets\ActiveField::textInput()
+     */
+    const TYPE_INPUT = 1;
+    /**
+     * Type field of 'textArea'.
+     * @see \yii\widgets\ActiveField::textArea()
+     */
+    const TYPE_TEXT = 2;
+    /**
+     * Type field of 'dropDownList'.
+     * @see \yii\widgets\ActiveField::dropDownList()
+     */
+    const TYPE_DROPDOWN = 3;
+    /**
+     * Type field of 'checkboxList'.
+     * @see \yii\widgets\ActiveField::checkboxList()
+     */
+    const TYPE_CHECKBOX_LIST = 4;
+    /**
+     * Type field of 'radioList'.
+     * @see \yii\widgets\ActiveField::radioList()
+     */
+    const TYPE_RADIO_LIST = 5;
+    /**
+     * Type field of 'checkbox'.
+     * @see \yii\widgets\ActiveField::checkbox()
+     */
+    const TYPE_YES_NO = 6;
+    /**
+     * Type field of 'widget'.
+     * @see \yii\widgets\ActiveField::widget()
+     */
+    const TYPE_WIDGET = 7;
+    
+    /**
+     * Сonfiguration parameter does not depend on language settings.
+     */
+    const LANGUAGE_ALL = 0;
+    /**
+     * Configuration paramter depend on 'Russian' language settings.
+     */
+    const LANGUAGE_RU = 1;
+    
+    /**
      * @var array|MessageSource Translation message configuration for parameters of config.
      */
     public $i18n;
@@ -41,19 +86,6 @@ class Module extends \yii\base\Module
      * @var array List parameters of config the application.
      * Key 'rules' and 'options' this array which will be serialized to string.
      * 'rules' content array rules for this configuration paramters without field name, only validation properties.
-     * @example If you want add 'boolean' validation rule, then to model you do following:
-     * ```
-     * ['field_name', 'boolean']
-     * ```
-     * Here you must be remove 'field_name': 
-     * ```
-     * ['boolean']
-     * ```
-     * This code you must be add to validation rules.
-     * @see Config::rules()
-     * @see Config::afterFind()
-     * @see Config::attributeLabels()
-     * @see ActiveForm::field()
      */
     public $params = [
         [
@@ -61,17 +93,17 @@ class Module extends \yii\base\Module
             'name' => 'enable',                         // unique name of parameters
             'label' => 'PARAM_ENABLE',                  // label
             'value' => '1',                             // value
-            'type' => Config::TYPE_YES_NO,              // type
-            'language' => Config::LANGUAGE_ALL,         // for multilanguage application
-            'rules' => [                                // rules
+            'type' => self::TYPE_YES_NO,                // type of field
+            'language' => self::LANGUAGE_ALL,           // for multilanguage application
+            'rules' => [                                // rules of field
                 ['boolean'],
             ],
-            'options' => [                              // arguments of field type
+            'options' => [                              // field options
                 ['maxlength' => true]
             ],
             'hint' => 'HINT_PARAM_DISPLAY_SITENAME',    // hint
         ],
-    ];
+    ];   
     
     /**
      * @inheritdoc
@@ -120,6 +152,41 @@ class Module extends \yii\base\Module
     }
     
     /**
+     * Returned list types or item.
+     * @param integer $key Whether is set, then will be returned element with this key.
+     * @return mixed
+     */
+    static public function typeList($key = null)
+    {
+        $items = [
+            self::TYPE_INPUT => 'textInput',
+            self::TYPE_TEXT => 'textArea',
+            self::TYPE_DROPDOWN => 'dropDownList',
+            self::TYPE_CHECKBOX_LIST => 'checkboxList',
+            self::TYPE_RADIO_LIST => 'radioList',
+            self::TYPE_YES_NO => 'checkbox',
+            self::TYPE_WIDGET => 'widget',
+        ];
+        return self::findByKey($items, $key);
+    }
+    
+    /**
+     * Returned languages list or item.
+     * @param string $key Whether is set, then will be returned element with this key.
+     */
+    static public function languageList($key = null)
+    {
+        $items = [
+            'ru' => self::LANGUAGE_RU,
+        ];
+        $tmp = explode('-', $key);
+        if (isset($tmp[0])) {
+            $key = $tmp[0];
+        }
+        return self::findByKey($items, $key);
+    }
+    
+    /**
      * Registration of translation class.
      */
     protected function registerTranslations()
@@ -139,4 +206,23 @@ class Module extends \yii\base\Module
             Yii::$app->i18n->translations[$this->messageCategory] = $this->i18n;
         }
     }
+    
+    /**
+     * Find by key for list of items.
+     * @param array $items List of items.
+     * @param mixed $key Key of item.
+     * @return mixed
+     */
+    static protected function findByKey($items, $key)
+    {
+        if ($key !== null) {
+            if (isset($items[$key])) {
+                return $items[$key];
+            } else {
+                return null;
+            }
+        }
+        return $items;
+    }
+    
 }

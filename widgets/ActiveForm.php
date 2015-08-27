@@ -2,9 +2,7 @@
 
 namespace bupy7\config\widgets;
 
-use Yii;
 use bupy7\config\Module;
-use bupy7\config\models\Config;
 
 /**
  * ActiveForm widget for Config module.
@@ -24,10 +22,7 @@ class ActiveForm extends \yii\bootstrap\ActiveForm
     public function field($model, $attribute = 'value', $options = [])
     {
         $field = parent::field($model, "[{$model->id}]{$attribute}", $options);
-        $field = call_user_func_array([$field, Config::typeList($model->type)], $model->options);
-        if (!empty($model->hint)) {
-            $field = $field->hint(Yii::t(Module::getInstance()->messageCategory, $model->hint));
-        }
+        $field = call_user_func_array([$field, Module::typeList($model->type)], $model->options);
         return $field;
     }
 }

@@ -41,15 +41,15 @@ class ManagerController extends Controller
             return self::EXIT_CODE_NORMAL;
         }     
         // insert params
-        $success = 0;
+        $added = 0;
         $all = count($this->params);
         foreach ($this->params as $param) {
-            $success += $this->insert($param);
+            $added += $this->insert($param);
         }       
         // flush cache
         $this->run('cache/flush-all');      
         $this->stdout(
-            "\nConfiguration successfully initialized. All parameters: {$all}. Successfully added: {$success}.\n", 
+            "\nConfiguration successfully initialized. All parameters: {$all}. Successfully added: {$added}.\n", 
             Console::FG_GREEN
         );
     }

@@ -63,11 +63,11 @@ class ConfigManager extends \yii\base\Component
             $module = Module::getInstance();     
             if ($module->enableCaching) {
                 if (($this->_params = $module->cache->get([__CLASS__, 'params'])) === false) {
-                    $this->_params = Config::params();
+                    $this->_params = Config::paramsArray();
                     $module->cache->set([__CLASS__, 'params'], $this->_params);
                 }
             } else {
-                $this->_params = Config::params();
+                $this->_params = Config::paramsArray();
             }
         }
     }
