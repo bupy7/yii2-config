@@ -99,12 +99,12 @@ shop, cart, blog, news and etc.).
 
 - ```label``` (string) - Label of parameter. It must be translation message. More info 
 to ```Yii::t()```.
-- ```type``` (integer) - Type of field (bupy7\config\Module::TYPE_INPUT, 
-bupy7\config\Module::TYPE_TEXT and etc). Allowed type field you can see to 
+- ```type``` (integer) - Type of field (```bupy7\config\Module::TYPE_INPUT```, 
+```bupy7\config\Module::TYPE_TEXT``` and etc). Allowed type field you can see to 
 ```bupy7\config\Module```.
 
 - ```language``` (integer) - Language for which this config parameter will be uses (
-bupy7\config\Module::LANGUAGE_RU, bupy7\config\Module::LANGUAGE_ALL and etc).
+```bupy7\config\Module::LANGUAGE_RU```, ```bupy7\config\Module::LANGUAGE_ALL``` and etc).
 - ```rules``` (array) - Rules of field. All rules must be specified without field name.
 Example: 
 ```php
