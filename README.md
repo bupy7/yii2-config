@@ -92,7 +92,7 @@ config/default/index
 
 ### Adding config parameters
 
-All parameters **required** must be content following options:
+All config parameters **necessarily** must contain following options:
 
 - `module` *(string)* - Name of module parameter where it will be use (app, 
 shop, cart, blog, news and etc.).
