@@ -82,7 +82,7 @@ class ManagerController extends Controller
                 ->execute();
         }
         // flush cache
-        if ($added > 0) {
+        if ($added > 0 || $removed > 0) {
             $this->run('cache/flush-all');
         }       
         $this->stdout("Rescan successfully finished. Added: {$added}. Removed: {$removed}.\n", Console::FG_GREEN);
