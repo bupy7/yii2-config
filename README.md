@@ -120,8 +120,124 @@ Additional options:
 - `value` *(string)* -  Value of config parameter.
 - `options` *(array)* - Options depend of field type. More info to 
 `bupy7\config\widgets\ActiveForm::field()`.
+Example for ```textInput``` type:
+```php
+'options' => [
+    ['maxlength' => true]
+],
+```
 - `hint` *(string)* - Hint of field. It must be translation message. More info 
 to `Yii::t()`.
+
+Example:
+
+```php
+use bupy7\config\Module as ConfigModule;
+
+...
+'modules' => [
+
+    ...
+
+    'config' => [
+        'class' => 'bupy7\config\Module',
+        'enableCaching' => !YII_DEBUG,
+        'as access' => [
+            'class' => AccessControl::className(),
+            'rules' => [
+                [
+                    'allow' => true,
+                    'roles' => ['admin'],
+                ],
+            ],
+        ],
+        'params' => [
+            [
+                'module' => 'app', 
+                'name' => 'backendSitename', 
+                'label' => 'PARAM_BACKEND_SITENAME', 
+                'value' => 'Backend', 
+                'type' => ConfigModule::TYPE_INPUT, 
+                'language' => ConfigModule::LANGUAGE_RU,
+                'rules' => [
+                    ['required'],
+                    ['string', 'max' => 255],
+                ], 
+                'options' => [
+                    ['maxlength' => true]
+                ],
+            ],
+            [
+                'module' => 'app', 
+                'name' => 'frontendSitename', 
+                'label' => 'PARAM_FRONTEND_SITENAME', 
+                'value' => 'Frontend', 
+                'type' => ConfigModule::TYPE_INPUT, 
+                'language' => ConfigModule::LANGUAGE_RU,
+                'rules' => [
+                    ['required'],
+                    ['string', 'max' => 255],
+                ], 
+                'options' => [
+                    ['maxlength' => true]
+                ],
+            ],            
+            [
+                'module' => 'app', 
+                'name' => 'displaySitename', 
+                'label' => 'PARAM_DISPLAY_SITENAME', 
+                'value' => '0', 
+                'type' => ConfigModule::TYPE_YES_NO, 
+                'language' => ConfigModule::LANGUAGE_ALL, 
+                'rules' => [
+                    ['boolean'],
+                ], 
+                'hint' => 'HINT_PARAM_DISPLAY_SITENAME',
+            ],
+            [
+                'module' => 'app', 
+                'name' => 'supportEmail', 
+                'label' => 'PARAM_SUPPORT_EMAIL', 
+                'value' => 'support@support.com', 
+                'type' => ConfigModule::TYPE_INPUT, 
+                'language' => ConfigModule::LANGUAGE_RU, 
+                'rules' => [
+                    ['required'],
+                    ['email'],
+                ],
+            ],
+            [
+                'module' => 'app', 
+                'name' => 'supportNameEmail', 
+                'label' => 'PARAM_SUPPORT_NAME_EMAIL', 
+                'value' => 'Support of site', 
+                'type' => ConfigModule::TYPE_INPUT, 
+                'language' => ConfigModule::LANGUAGE_RU, 
+                'rules' => [
+                    ['required'],
+                    ['string', 'max' => 255],
+                ],
+                'options' => [
+                    ['maxlength' => true]
+                ],
+            ],
+        ],
+    ],
+
+    ...
+
+],
+```
+
+After added configuration parameters run rescan:
+
+```
+./yii config/rescan
+```
+
+Result:
+
+![Screenshot](screenshot.png)
 
 ##License
 
