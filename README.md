@@ -249,7 +249,7 @@ Result:
 Yii::$app->configManager->get('exampleModuleName', 'exampleParameterName');
 ``` 
 
-If parameter not found, then will be throw exception.
+> If parameter not found, then will be throw exception.
 
 ### Console commands
 
