@@ -8,6 +8,7 @@ use yii\helpers\Console;
 use yii\db\Query;
 use bupy7\config\models\Config;
 use bupy7\config\Module;
+use yii\db\Exception as DbException;
 
 /**
  * Configurtion manager for create, delete and update configuration parameters of application.
@@ -40,18 +41,25 @@ class ManagerController extends Controller
         if (!$this->confirm('Initialization configuration of application?')) {
             return self::EXIT_CODE_NORMAL;
         }     
-        // reset config table
-        Yii::$app->db->createCommand()->truncateTable(Config::tableName())->execute();
-        // insert params
-        $added = 0;
-        $all = count($this->params);
-        foreach ($this->params as $param) {
-            $added += $this->insert($param);
-        }       
+        $transaction = Yii::$app->db->beginTransaction();
+        try {
+            // reset config table
+            Yii::$app->db->createCommand()->delete(Config::tableName())->execute();
+            // insert params
+            $added = 0;
+            $all = count($this->params);
+            foreach ($this->params as $param) {
+                $added += $this->insert($param);
+            }   
+            $transaction->commit();
+        } catch (DbException $e) {
+            $transaction->rollBack();
+            throw $e;
+        }
         // flush cache
         $this->run('cache/flush-all');      
         $this->stdout(
-            "\nConfiguration successfully initialized. All parameters: {$all}. Successfully added: {$added}.\n", 
+            "Configuration successfully initialized. All parameters: {$all}. Successfully added: {$added}.\n", 
             Console::FG_GREEN
         );
     }
@@ -69,19 +77,26 @@ class ManagerController extends Controller
                 return md5($row['module'] . $row['name'] . $row['language']);
             })
             ->all();
-        // add
-        foreach ($this->params as $param) {
-            $key = md5($param['module'] . $param['name'] . $param['language']);
-            if (!isset($allowedParams[$key])) {
-                $added += $this->insert($param);
+        $transaction = Yii::$app->db->beginTransaction();
+        try {
+            // add
+            foreach ($this->params as $param) {
+                $key = md5($param['module'] . $param['name'] . $param['language']);
+                if (!isset($allowedParams[$key])) {
+                    $added += $this->insert($param);
+                }
+                unset($allowedParams[$key]);
+            }     
+            // remove
+            foreach ($allowedParams as $param) {
+                $removed += Yii::$app->db->createCommand()
+                    ->delete(Config::tableName(), ['id' => $param['id']])
+                    ->execute();
             }
-            unset($allowedParams[$key]);
-        }     
-        // remove
-        foreach ($allowedParams as $param) {
-            $removed += Yii::$app->db->createCommand()
-                ->delete(Config::tableName(), ['id' => $param['id']])
-                ->execute();
+            $transaction->commit();
+        } catch (DbException $e) {
+            $transaction->rollBack();
+            throw $e;
         }
         // flush cache
         if ($added > 0 || $removed > 0) {
