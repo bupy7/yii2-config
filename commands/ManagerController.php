@@ -64,12 +64,12 @@ class ManagerController extends Controller
         $allowedParams = (new Query)
             ->from(Config::tableName())
             ->indexBy(function($row) {
-                return $row['module'] . '.' . $row['name'];
+                return md5($row['module'] . $row['name'] . $row['language']);
             })
             ->all();
         // add
         foreach ($this->params as $param) {
-            $key = $param['module'] . '.' . $param['name'];
+            $key = md5($param['module'] . $param['name'] . $param['language']);
             if (!isset($allowedParams[$key])) {
                 $added += $this->insert($param);
             }
@@ -102,5 +102,6 @@ class ManagerController extends Controller
         }
         return Yii::$app->db->createCommand()->insert(Config::tableName(), $param)->execute();
     }   
+    
 }
 
