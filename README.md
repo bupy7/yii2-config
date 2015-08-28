@@ -105,9 +105,6 @@ to `Yii::t()`.
 - `type` *(integer)* - Type of field (`bupy7\config\Module::TYPE_INPUT`, 
 `bupy7\config\Module::TYPE_TEXT` and etc). Allowed type field you can see to 
 `bupy7\config\Module`.
-
-- `language` *(integer)* - Language for which this config parameter will be uses (
-`bupy7\config\Module::LANGUAGE_RU`, `bupy7\config\Module::LANGUAGE_ALL` and etc).
 - `rules` *(array)* - Rules of field. All rules must be specified without field name.
 Example: 
 ```php
@@ -120,6 +117,9 @@ More info to `bupy7\config\models\Config::afterFind()`.
 
 Additional options:
 
+- `language` *(string|null)* - Language for which this config parameter will be 
+uses ('ru', 'en' and etc). If language is not set, then this parameter will be 
+uses for all languages. More info `yii\console\Application::$language|yii\web\Application::$language`.
 - `value` *(string)* -  Value of config parameter. By default empty.
 - `options` *(array)* - Options depend of field type. More info to 
 `bupy7\config\widgets\ActiveForm::field()`.
@@ -161,7 +161,7 @@ use bupy7\config\Module as ConfigModule;
                 'label' => 'PARAM_BACKEND_SITENAME', 
                 'value' => 'Backend', 
                 'type' => ConfigModule::TYPE_INPUT, 
-                'language' => ConfigModule::LANGUAGE_RU,
+                'language' => 'ru',
                 'rules' => [
                     ['required'],
                     ['string', 'max' => 255],
@@ -176,7 +176,7 @@ use bupy7\config\Module as ConfigModule;
                 'label' => 'PARAM_FRONTEND_SITENAME', 
                 'value' => 'Frontend', 
                 'type' => ConfigModule::TYPE_INPUT, 
-                'language' => ConfigModule::LANGUAGE_RU,
+                'language' => 'ru',
                 'rules' => [
                     ['required'],
                     ['string', 'max' => 255],
@@ -191,7 +191,7 @@ use bupy7\config\Module as ConfigModule;
                 'label' => 'PARAM_DISPLAY_SITENAME', 
                 'value' => '0', 
                 'type' => ConfigModule::TYPE_YES_NO, 
-                'language' => ConfigModule::LANGUAGE_ALL, 
+                'language' => null, 
                 'rules' => [
                     ['boolean'],
                 ], 
@@ -203,7 +203,7 @@ use bupy7\config\Module as ConfigModule;
                 'label' => 'PARAM_SUPPORT_EMAIL', 
                 'value' => 'support@support.com', 
                 'type' => ConfigModule::TYPE_INPUT, 
-                'language' => ConfigModule::LANGUAGE_RU, 
+                'language' => null, 
                 'rules' => [
                     ['required'],
                     ['email'],
@@ -215,7 +215,7 @@ use bupy7\config\Module as ConfigModule;
                 'label' => 'PARAM_SUPPORT_NAME_EMAIL', 
                 'value' => 'Support of site', 
                 'type' => ConfigModule::TYPE_INPUT, 
-                'language' => ConfigModule::LANGUAGE_RU, 
+                'language' => 'ru', 
                 'rules' => [
                     ['required'],
                     ['string', 'max' => 255],

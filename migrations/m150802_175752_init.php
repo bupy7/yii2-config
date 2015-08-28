@@ -15,7 +15,7 @@ class m150802_175752_init extends Migration
             'label' => Schema::TYPE_STRING . ' NOT NULL',
             'value' => Schema::TYPE_TEXT,
             'type' => Schema::TYPE_SMALLINT . ' NOT NULL',
-            'language' => Schema::TYPE_SMALLINT . ' NOT NULL',
+            'language' => Schema::TYPE_STRING . '(16)',
             'hint' => Schema::TYPE_TEXT,
             'options' => Schema::TYPE_BINARY,
             'rule' => Schema::TYPE_BINARY,

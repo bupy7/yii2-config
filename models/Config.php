@@ -121,8 +121,8 @@ class Config extends ActiveRecord
             ->from(self::tableName())
             ->where([
                 'or', 
-                ['language' => Module::languageList(Yii::$app->language)], 
-                ['language' => Module::LANGUAGE_ALL],
+                ['language' => Yii::$app->language], 
+                ['language' => null],
             ]);
         $result = [];
         foreach ($query->batch() as $rows) {

@@ -53,15 +53,6 @@ class Module extends \yii\base\Module
     const TYPE_WIDGET = 7;
     
     /**
-     * Сonfiguration parameter does not depend on language settings.
-     */
-    const LANGUAGE_ALL = 0;
-    /**
-     * Configuration paramter depend on 'Russian' language settings.
-     */
-    const LANGUAGE_RU = 1;
-    
-    /**
      * @var array|MessageSource Translation message configuration for parameters of config.
      */
     public $i18n;
@@ -98,9 +89,6 @@ class Module extends \yii\base\Module
      *  - `type` *(integer)* - Type of field (`bupy7\config\Module::TYPE_INPUT`, 
      *  `bupy7\config\Module::TYPE_TEXT` and etc). Allowed type field you can see to 
      *  `bupy7\config\Module`.
-     *
-     *  - `language` *(integer)* - Language for which this config parameter will be uses (
-     *  `bupy7\config\Module::LANGUAGE_RU`, `bupy7\config\Module::LANGUAGE_ALL` and etc).
      *  - `rules` *(array)* - Rules of field. All rules must be specified without field name.
      *  Example: 
      *  ```php
@@ -112,7 +100,9 @@ class Module extends \yii\base\Module
      *  More info to `bupy7\config\models\Config::afterFind()`. 
      *
      *  Additional options:
-     *
+     * - `language` *(string|null)* - Language for which this config parameter will be uses ('ru', 'en' and etc). 
+     * If language is not set, then this parameter will be uses for all languages. More info 
+     * `yii\console\Application::$language|yii\web\Application::$language`.
      *  - `value` *(string)* -  Value of config parameter.
      *  - `options` *(array)* - Options depend of field type. More info to 
      *  `bupy7\config\widgets\ActiveForm::field()`.
@@ -132,7 +122,7 @@ class Module extends \yii\base\Module
             'label' => 'PARAM_ENABLE',                  // label
             'value' => '1',                             // value
             'type' => self::TYPE_YES_NO,                // type of field
-            'language' => self::LANGUAGE_ALL,           // for multilanguage application
+            'language' => null,                         // for multilanguage application
             'rules' => [                                // rules of field
                 ['boolean'],
             ],
@@ -205,22 +195,6 @@ class Module extends \yii\base\Module
             self::TYPE_YES_NO => 'checkbox',
             self::TYPE_WIDGET => 'widget',
         ];
-        return self::findByKey($items, $key);
-    }
-    
-    /**
-     * Returned languages list or item.
-     * @param string $key Whether is set, then will be returned element with this key.
-     */
-    static public function languageList($key = null)
-    {
-        $items = [
-            'ru' => self::LANGUAGE_RU,
-        ];
-        $tmp = explode('-', $key);
-        if (isset($tmp[0])) {
-            $key = $tmp[0];
-        }
         return self::findByKey($items, $key);
     }
     
