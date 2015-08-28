@@ -16,7 +16,7 @@ use bupy7\config\Module;
  * @property string $label
  * @property string $value
  * @property integer $type
- * @property integer $language
+ * @property string $language
  * @property string $hint
  * @property string $options
  * @property string $rules
