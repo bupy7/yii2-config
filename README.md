@@ -251,6 +251,20 @@ Yii::$app->configManager->get('exampleModuleName', 'exampleParameterName');
 
 If parameter not found, then will be throw exception.
 
+### Console commands
+
+Initialization the configuration parameters of application with deleting old parameters:
+```
+./yii config/init
+```
+
+Adding new and deleting not exists config parameters of application:
+```
+./yii config/rescan
+```
+
+> After successfully adding/deleting parameters cache will be cleared.
+
 ##License
 
 yii2-config is released under the BSD 3-Clause License.
