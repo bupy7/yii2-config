@@ -49,7 +49,12 @@ class ConfigManager extends \yii\base\Component
     {
         $this->prepare();
         if (isset($this->_params[$module][$name])) {
-            return $this->_params[$module][$name];
+            $param = $this->_params[$module][$name];
+            if (isset($param[Yii::$app->language])) {
+                return $param[Yii::$app->language];
+            } elseif (isset($param[Module::LANGUAGE_ALL])) {
+                return $param[Module::LANGUAGE_ALL];
+            }
         }
         throw new Exception(Module::t('PARAMETER_NOT_FOUND', ['module' => $module, 'name' => $name]), 500);
     }

@@ -112,22 +112,12 @@ class Config extends ActiveRecord
      */
     static public function paramsArray()
     {
-        $query = (new Query)
-            ->select([
-                'module', 
-                'name', 
-                'value',
-            ])
-            ->from(self::tableName())
-            ->where([
-                'or', 
-                ['language' => Yii::$app->language], 
-                ['language' => Module::LANGUAGE_ALL],
-            ]);
+        $query = (new Query)->from(self::tableName());
         $result = [];
         foreach ($query->batch() as $rows) {
             for ($i = 0; $i != count($rows); $i++) {
-                $result[$rows[$i]['module']][$rows[$i]['name']] = $rows[$i]['value'];
+                $row = $rows[$i];
+                $result[$row['module']][$row['name']][$row['language']] = $row['value'];
             }
         }
         return $result;
