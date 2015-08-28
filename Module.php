@@ -53,6 +53,11 @@ class Module extends \yii\base\Module
     const TYPE_WIDGET = 7;
     
     /**
+     * Сonfiguration parameter does not depend on language settings.
+     */
+    const LANGUAGE_ALL = '-';
+    
+    /**
      * @var array|MessageSource Translation message configuration for parameters of config.
      */
     public $i18n;
@@ -100,9 +105,9 @@ class Module extends \yii\base\Module
      *  More info to `bupy7\config\models\Config::afterFind()`. 
      *
      *  Additional options:
-     * - `language` *(string|null)* - Language for which this config parameter will be uses ('ru', 'en' and etc). 
-     * If language is not set, then this parameter will be uses for all languages. More info 
-     * `yii\console\Application::$language|yii\web\Application::$language`.
+     * - `language` *(string)* - Language for which this config parameter will be uses ('ru', 'en' and etc). 
+     * If language is `bupy7\config\Module::LANGUAGE_ALL` or not set, then this parameter will be uses for all 
+     * languages. More info `yii\console\Application::$language|yii\web\Application::$language`.
      *  - `value` *(string)* -  Value of config parameter.
      *  - `options` *(array)* - Options depend of field type. More info to 
      *  `bupy7\config\widgets\ActiveForm::field()`.
@@ -122,7 +127,7 @@ class Module extends \yii\base\Module
             'label' => 'PARAM_ENABLE',                  // label
             'value' => '1',                             // value
             'type' => self::TYPE_YES_NO,                // type of field
-            'language' => null,                         // for multilanguage application
+            'language' => self::LANGUAGE_ALL,           // for multilanguage application
             'rules' => [                                // rules of field
                 ['boolean'],
             ],

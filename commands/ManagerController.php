@@ -40,6 +40,8 @@ class ManagerController extends Controller
         if (!$this->confirm('Initialization configuration of application?')) {
             return self::EXIT_CODE_NORMAL;
         }     
+        // reset config table
+        Yii::$app->db->createCommand()->truncateTable(Config::tableName())->execute();
         // insert params
         $added = 0;
         $all = count($this->params);

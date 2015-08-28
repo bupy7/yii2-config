@@ -117,9 +117,10 @@ More info to `bupy7\config\models\Config::afterFind()`.
 
 Additional options:
 
-- `language` *(string|null)* - Language for which this config parameter will be 
-uses ('ru', 'en' and etc). If language is not set, then this parameter will be 
-uses for all languages. More info `yii\console\Application::$language|yii\web\Application::$language`.
+- `language` *(string)* - Language for which this config parameter will be 
+uses ('ru', 'en' and etc). If language is `bupy7\config\Module::LANGUAGE_ALL` or 
+not set, then this parameter will be uses for all languages. More info 
+`yii\console\Application::$language|yii\web\Application::$language`.
 - `value` *(string)* -  Value of config parameter. By default empty.
 - `options` *(array)* - Options depend of field type. More info to 
 `bupy7\config\widgets\ActiveForm::field()`.
@@ -191,7 +192,7 @@ use bupy7\config\Module as ConfigModule;
                 'label' => 'PARAM_DISPLAY_SITENAME', 
                 'value' => '0', 
                 'type' => ConfigModule::TYPE_YES_NO, 
-                'language' => null, 
+                'language' => ConfigModule::LANGUAGE_ALL, 
                 'rules' => [
                     ['boolean'],
                 ], 
@@ -203,7 +204,7 @@ use bupy7\config\Module as ConfigModule;
                 'label' => 'PARAM_SUPPORT_EMAIL', 
                 'value' => 'support@support.com', 
                 'type' => ConfigModule::TYPE_INPUT, 
-                'language' => null, 
+                'language' => ConfigModule::LANGUAGE_ALL, 
                 'rules' => [
                     ['required'],
                     ['email'],

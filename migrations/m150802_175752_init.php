@@ -15,13 +15,14 @@ class m150802_175752_init extends Migration
             'label' => Schema::TYPE_STRING . ' NOT NULL',
             'value' => Schema::TYPE_TEXT,
             'type' => Schema::TYPE_SMALLINT . ' NOT NULL',
-            'language' => Schema::TYPE_STRING . '(16)',
+            'language' => Schema::TYPE_STRING . '(16) NOT NULL DEFAULT "-"',
             'hint' => Schema::TYPE_TEXT,
             'options' => Schema::TYPE_BINARY,
             'rule' => Schema::TYPE_BINARY,
         ]);
-        $this->createIndex('unique-module-name', Config::tableName(), ['module', 'name', 'language'], true);
+        $this->createIndex('unique-module-name-language', Config::tableName(), ['module', 'name', 'language'], true);
         $this->createIndex('index-language', Config::tableName(), ['language']);
+        $this->createIndex('index-module', Config::tableName(), ['module']);
     }
 
     public function down()
