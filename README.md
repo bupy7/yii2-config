@@ -161,7 +161,7 @@ use bupy7\config\Module as ConfigModule;
                 'label' => 'PARAM_BACKEND_SITENAME', 
                 'value' => 'Backend', 
                 'type' => ConfigModule::TYPE_INPUT, 
-                'language' => 'ru',
+                'language' => 'en',
                 'rules' => [
                     ['required'],
                     ['string', 'max' => 255],
@@ -176,7 +176,7 @@ use bupy7\config\Module as ConfigModule;
                 'label' => 'PARAM_FRONTEND_SITENAME', 
                 'value' => 'Frontend', 
                 'type' => ConfigModule::TYPE_INPUT, 
-                'language' => 'ru',
+                'language' => 'en',
                 'rules' => [
                     ['required'],
                     ['string', 'max' => 255],
@@ -215,7 +215,7 @@ use bupy7\config\Module as ConfigModule;
                 'label' => 'PARAM_SUPPORT_NAME_EMAIL', 
                 'value' => 'Support of site', 
                 'type' => ConfigModule::TYPE_INPUT, 
-                'language' => 'ru', 
+                'language' => 'en', 
                 'rules' => [
                     ['required'],
                     ['string', 'max' => 255],
