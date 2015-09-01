@@ -8,6 +8,11 @@ class m150802_175752_init extends Migration
 {
     public function up()
     {
+        $tableOptions = null;
+        if ($this->db->driverName === 'mysql') {
+            // http://stackoverflow.com/questions/766809/whats-the-difference-between-utf8-general-ci-and-utf8-unicode-ci
+            $tableOptions = 'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=InnoDB';
+        }
         $this->createTable(Config::tableName(), [
             'id' => Schema::TYPE_PK,
             'module' => Schema::TYPE_STRING . ' NOT NULL',
@@ -19,7 +24,7 @@ class m150802_175752_init extends Migration
             'hint' => Schema::TYPE_TEXT,
             'options' => Schema::TYPE_BINARY,
             'rule' => Schema::TYPE_BINARY,
-        ]);
+        ], $tableOptions);
         $this->createIndex('unique-module-name-language', Config::tableName(), ['module', 'name', 'language'], true);
         $this->createIndex('index-language', Config::tableName(), ['language']);
         $this->createIndex('index-module', Config::tableName(), ['module']);
