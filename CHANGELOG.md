@@ -3,7 +3,8 @@
 ## v1.0.2 (2015-09-15)
 
 - Fix migration file. 
-- Added Bootstrap module.
+- Added modules bootstrap.
+- Added ability automatic adding commands of module to the console application.
 
 ## v1.0.1 (2015-08-29)
 
