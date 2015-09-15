@@ -9,13 +9,15 @@ use yii\di\Instance;
 use yii\caching\Cache;
 use bupy7\config\components\ConfigManager;
 use bupy7\config\commands\ManagerController;
+use yii\console\Application as ConsoleApplication;
+use yii\base\BootstrapInterface;
 
 /**
  * This is module for configuration dynamic parameters of application.
  * @author Belosludcev Vasilij http://mihaly4.ru
  * @since 1.0.0
  */
-class Module extends \yii\base\Module implements \yii\base\BootstrapInterface
+class Module extends \yii\base\Module implements BootstrapInterface
 {
     /**
      * Type field of 'textInput' .
@@ -176,8 +178,10 @@ class Module extends \yii\base\Module implements \yii\base\BootstrapInterface
      */
     public function bootstrap($app)
     {
-        if ($app instanceof \yii\console\Application) {
-            $app->controllerMap['config'] = ManagerController::className();
+        if ($app instanceof ConsoleApplication) {
+            $app->controllerMap[$this->id] = [
+				'class' => ManagerController::className(),
+			];
         }
     }
     
