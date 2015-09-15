@@ -175,13 +175,14 @@ class Module extends \yii\base\Module implements BootstrapInterface
     
     /**
      * @inheritdoc
+     * @since 1.0.2
      */
     public function bootstrap($app)
     {
         if ($app instanceof ConsoleApplication) {
             $app->controllerMap[$this->id] = [
-				'class' => ManagerController::className(),
-			];
+                'class' => ManagerController::className(),
+            ];
         }
     }
     

@@ -32,20 +32,6 @@ Run migration:
 ./yii migrate/up --migrationPath=@bupy7/config/migrations 
 ```
 
-Added to console application config:
-
-```php
-'controllerMap' => [
-    ...
-
-    'config' => [
-        'class' => 'bupy7\config\commands\ManagerController',
-    ],
-
-    ...
-],
-```
-
 Added to main application config:
 
 ```php
@@ -252,6 +238,8 @@ Yii::$app->configManager->get('exampleModuleName', 'exampleParameterName');
 > If parameter not found, then will be throw exception.
 
 ### Console commands
+
+> By default command name equals module name (module name - `config` and command name - `config`).
 
 Initialization the configuration parameters of application with deleting old parameters:
 ```

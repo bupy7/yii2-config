@@ -19,8 +19,5 @@
         "psr-4": {
             "bupy7\\config\\": ""
         }
-    },
-    "extra": {
-        "bootstrap": "bupy7\\config\\Module"
     }
 }
