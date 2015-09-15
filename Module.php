@@ -8,13 +8,14 @@ use yii\base\InvalidConfigException;
 use yii\di\Instance;
 use yii\caching\Cache;
 use bupy7\config\components\ConfigManager;
+use bupy7\config\commands\ManagerController;
 
 /**
  * This is module for configuration dynamic parameters of application.
  * @author Belosludcev Vasilij http://mihaly4.ru
  * @since 1.0.0
  */
-class Module extends \yii\base\Module
+class Module extends \yii\base\Module implements \yii\base\BootstrapInterface
 {
     /**
      * Type field of 'textInput' .
@@ -171,6 +172,16 @@ class Module extends \yii\base\Module
     }
     
     /**
+     * @inheritdoc
+     */
+    public function bootstrap($app)
+    {
+        if ($app instanceof \yii\console\Application) {
+            $app->controllerMap['config'] = ManagerController::className();
+        }
+    }
+    
+    /**
      * Translates a message to the specified language.
      * 
      * @param string $message the message to be translated.
@@ -241,5 +252,4 @@ class Module extends \yii\base\Module
         }
         return $items;
     }
-    
 }
