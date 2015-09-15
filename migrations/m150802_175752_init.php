@@ -23,7 +23,7 @@ class m150802_175752_init extends Migration
             'language' => Schema::TYPE_STRING . '(16) NOT NULL DEFAULT "-"',
             'hint' => Schema::TYPE_TEXT,
             'options' => Schema::TYPE_BINARY,
-            'rule' => Schema::TYPE_BINARY,
+            'rules' => Schema::TYPE_BINARY,
         ], $tableOptions);
         $this->createIndex('unique-module-name-language', Config::tableName(), ['module', 'name', 'language'], true);
         $this->createIndex('index-language', Config::tableName(), ['language']);
