@@ -140,6 +140,11 @@ class Module extends \yii\base\Module implements BootstrapInterface
             'hint' => 'HINT_PARAM_DISPLAY_SITENAME',    // hint
         ],
     ];   
+    /**
+     * @var string Table name of configuration parameters.
+     * @see 1.0.3
+     */
+    public $tableName = '{{%config}}';
     
     /**
      * @inheritdoc

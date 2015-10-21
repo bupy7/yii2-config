@@ -55,7 +55,7 @@ class Config extends ActiveRecord
      */
     static public function tableName()
     {
-        return '{{%config}}';
+        return Module::getInstance()->tableName;
     }
     
     /**
