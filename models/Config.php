@@ -6,6 +6,7 @@ use Yii;
 use yii\db\Query;
 use yii\db\ActiveRecord;
 use bupy7\config\Module;
+use bupy7\config\models\queries\ConfigQuery;
 
 /**
  * This is the model class for table "{{%config}}".
@@ -41,6 +42,16 @@ class Config extends ActiveRecord
      * @see attributeHints()
      */
     private $_hints = [];
+    
+    
+    /**
+     * @inheritdoc
+     * @since 1.0.4
+     */
+    static public function find()
+    {
+        return Yii::createObject(ConfigQuery::className(), [get_called_class()]);
+    }
     
     /**
      * @inheritdoc

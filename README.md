@@ -237,6 +237,14 @@ Yii::$app->configManager->get('exampleModuleName', 'exampleParameterName');
 
 > If parameter not found, then will be throw exception.
 
+### Set value of config parameter
+
+```php
+Yii::$app->configManager->set('exampleModuleName', 'exampleParameterName', 'exampleParameterValue');
+``` 
+
+> If parameter not found, then will be throw exception.
+
 ### Console commands
 
 > By default command name equals module name (module name - `config` and command name - `config`).

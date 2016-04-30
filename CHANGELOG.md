@@ -1,6 +1,14 @@
 yii2-config
 ===========
 
+v1.0.4 (2016-30-04)
+-------------------
+
+- Added special exceptions.
+- Added method `bupy7\config\components\ConfigManager::set()` for set up existing
+parameters on runtime.
+- Added English language translations.
+
 v1.0.3 (2015-10-21)
 -------------------
 

@@ -5,7 +5,8 @@ namespace bupy7\config\components;
 use Yii;
 use bupy7\config\models\Config;
 use bupy7\config\Module;
-use Exception;
+use bupy7\config\exceptions\InvalidParamValueException;
+use bupy7\config\exceptions\NotFoundParamException;
 
 /**
  * Management of configuration parameters. You can get parameters via this component.
@@ -44,6 +45,7 @@ class ConfigManager extends \yii\base\Component
      * @param string $module Name of module.
      * @param string $name Name of parameter.
      * @return mixed
+     * @throws NotFoundParamException
      */
     public function get($module, $name)
     {
@@ -56,7 +58,37 @@ class ConfigManager extends \yii\base\Component
                 return $param[Module::LANGUAGE_ALL];
             }
         }
-        throw new Exception(Module::t('PARAMETER_NOT_FOUND', ['module' => $module, 'name' => $name]), 500);
+        throw new NotFoundParamException(Module::t('PARAMETER_NOT_FOUND', ['module' => $module, 'name' => $name]));
+    }
+    
+    /**
+     * Set up value of parameter.
+     * 
+     * @param string $module The name of module.
+     * @param string $name The name of parameter.
+     * @param mixed $value The new value of parameter.
+     * @return boolean
+     * @since 1.0.4
+     * @throws NotFoundParamException
+     * @throws InvalidValueException
+     */
+    public function set($module, $name, $value)
+    {
+        $param = Config::find()
+            ->byModule($module)
+            ->byName($name)
+            ->one();
+        if ($param === null) {
+            throw new NotFoundParamException(Module::t('PARAMETER_NOT_FOUND', ['module' => $module, 'name' => $name]));
+        }
+        $param->value = $value;
+        if (!$param->save(true, ['value'])) {
+            throw new InvalidParamValueException(Module::t('INVALID_PARAMETER_VALUE', [
+                'module' => $module,
+                'name' => $name,
+            ]));
+        }
+        return $this->clearCache();
     }
     
     /**
@@ -75,6 +107,5 @@ class ConfigManager extends \yii\base\Component
                 $this->_params = Config::paramsArray();
             }
         }
-    }
-    
+    }   
 }

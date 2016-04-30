@@ -231,7 +231,6 @@ class Module extends \yii\base\Module implements BootstrapInterface
     {
         Yii::$app->i18n->translations['bupy7/config'] = [
             'class' => 'yii\i18n\PhpMessageSource',
-            'sourceLanguage' => 'en',
             'forceTranslation' => true,
             'basePath' => '@bupy7/config/messages',
             'fileMap' => [
