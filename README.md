@@ -26,12 +26,6 @@ to the require section of your `composer.json` file.
 Usage
 -----
 
-Run migration:
-
-```
-./yii migrate/up --migrationPath=@bupy7/config/migrations 
-```
-
 Added to main application config:
 
 ```php
@@ -62,6 +56,12 @@ Added to main application config:
         'class' => 'bupy7\config\components\ConfigManager',
     ],
 ],
+```
+
+Run migration:
+
+```
+./yii migrate/up --migrationPath=@bupy7/config/migrations 
 ```
 
 Install demo parameters:
