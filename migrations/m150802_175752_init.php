@@ -24,9 +24,9 @@ class m150802_175752_init extends Migration
             'options' => $this->text(),
             'rules' => $this->text(),
         ], $tableOptions);
-        $this->createIndex('unique-module-name-language', Config::tableName(), ['module', 'name', 'language'], true);
-        $this->createIndex('index-language', Config::tableName(), ['language']);
-        $this->createIndex('index-module', Config::tableName(), ['module']);
+        $this->createIndex('config_idx_1', Config::tableName(), ['module', 'name', 'language'], true);
+        $this->createIndex('config_idx_2', Config::tableName(), ['language']);
+        $this->createIndex('config_idx_3', Config::tableName(), ['module']);
     }
 
     public function down()
