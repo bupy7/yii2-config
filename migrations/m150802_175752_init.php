@@ -1,6 +1,5 @@
 <?php
 
-use yii\db\Schema;
 use yii\db\Migration;
 use bupy7\config\models\Config;
 
