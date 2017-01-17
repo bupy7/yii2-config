@@ -21,8 +21,8 @@ class m150802_175752_init extends Migration
             'type' => $this->smallInteger()->notNull(),
             'language' => $this->string(16)->notNull()->defaultValue('-'),
             'hint' => $this->text(),
-            'options' => $this->binary(),
-            'rules' => $this->binary(),
+            'options' => $this->text(),
+            'rules' => $this->text(),
         ], $tableOptions);
         $this->createIndex('unique-module-name-language', Config::tableName(), ['module', 'name', 'language'], true);
         $this->createIndex('index-language', Config::tableName(), ['language']);
