@@ -14,16 +14,16 @@ class m150802_175752_init extends Migration
             $tableOptions = 'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=InnoDB';
         }
         $this->createTable(Config::tableName(), [
-            'id' => Schema::TYPE_PK,
-            'module' => Schema::TYPE_STRING . ' NOT NULL',
-            'name' => Schema::TYPE_STRING . ' NOT NULL',
-            'label' => Schema::TYPE_STRING . ' NOT NULL',
-            'value' => Schema::TYPE_TEXT,
-            'type' => Schema::TYPE_SMALLINT . ' NOT NULL',
-            'language' => Schema::TYPE_STRING . '(16) NOT NULL DEFAULT "-"',
-            'hint' => Schema::TYPE_TEXT,
-            'options' => Schema::TYPE_BINARY,
-            'rules' => Schema::TYPE_BINARY,
+            'id' => $this->primaryKey(),
+            'module' => $this->string()->notNull(),
+            'name' => $this->string()->notNull(),
+            'label' => $this->string()->notNull(),
+            'value' => $this->text(),
+            'type' => $this->smallInteger()->notNull(),
+            'language' => $this->string(16)->notNull()->defaultValue('-'),
+            'hint' => $this->text(),
+            'options' => $this->binary(),
+            'rules' => $this->binary(),
         ], $tableOptions);
         $this->createIndex('unique-module-name-language', Config::tableName(), ['module', 'name', 'language'], true);
         $this->createIndex('index-language', Config::tableName(), ['language']);
