@@ -1,7 +1,7 @@
 yii2-config
 ===========
 
-v1.0.5 (2017-01-17)
+v1.1.0 (2017-01-17)
 -------------------
 
 - Migrations has compatibility for any databases.
