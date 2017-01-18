@@ -4,7 +4,7 @@
     "type": "yii2-extension",
     "keywords": ["yii2", "extension", "module", "config"],
     "license": "BSD-3-Clause",
-    "version": "1.0.4",
+    "version": "1.1.0",
     "authors": [
         {
             "name": "Vasilij Belosludcev",
